@@ -27,8 +27,6 @@ const reducer = (state = initialState, action) => {
       )
     case 'NEW_ANECDOTE':
       return state.concat(action.data)
-    case 'GET_ANECDOTE':
-      return state.find(a => a.id === action.data.id)
     case 'VOTE':
       const id = action.data.id
       const anecdoteToChange = state.find(a => a.id === id)
@@ -59,13 +57,6 @@ export const createAnecdote = (content) => {
       id: getId(),
       votes: 0
     }
-  }
-}
-
-export const getAnecdote = (id) => {
-  return {
-    type: 'GET_ANECDOTE',
-    data: { id }
   }
 }
 
