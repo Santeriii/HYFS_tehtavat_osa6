@@ -1,4 +1,3 @@
-import axios from 'axios'
 import anecdoteService from '../services/anecdotes'
 
 const reducer = (state = [], action) => {
@@ -42,10 +41,13 @@ export const createAnecdote = content => {
   }
 }
 
-export const vote = (id) => {
-  return {
-    type: 'VOTE',
-    data: { id }
+export const vote = id => {
+  return async dispatch => {
+    await anecdoteService.vote(id)
+    dispatch({
+      type: 'VOTE',
+      data: { id },
+    })
   }
 }
 
