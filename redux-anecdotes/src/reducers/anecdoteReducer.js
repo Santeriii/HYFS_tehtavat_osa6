@@ -1,3 +1,4 @@
+import axios from 'axios'
 import anecdoteService from '../services/anecdotes'
 
 const reducer = (state = [], action) => {
@@ -31,10 +32,13 @@ export const initializeAnecdotes = () => {
   }
 }
 
-export const createAnecdote = (data) => {
-  return {
-    type: 'NEW_ANECDOTE',
-    data,
+export const createAnecdote = content => {
+  return async dispatch => {
+    const newAnecdote = await anecdoteService.createNew(content)
+    dispatch({
+      type: 'NEW_ANECDOTE',
+      data: newAnecdote,
+    })
   }
 }
 
